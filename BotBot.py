@@ -223,7 +223,31 @@ async def meme(ctx):
 
     await ctx.send(file=img)
 
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
 
+
+@bot.command('duck')
+async def duck(ctx):
+    '''Setelah kita memanggil perintah bebek (duck), program akan memanggil fungsi get_duck_image_url'''
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
+
+@bot.command()
+async def help(ctx, count_heh = 5):
+    await ctx.send("Available commands:\n"
+                   "$hello - Greet the bot\n"
+                   "$calc <n1> <operator> <n2> - Calculate basic arithmetic operations\n"
+                   "$heh [count] - Send 'he' repeated count times (default 5)\n"
+                   "$lazy <question> - Ask a question to the bot\n"
+                   "$daurulang - Get information about recycling\n"
+                   "$lanjut - Get more information about recycling\n"
+                   "$meme - Get a random meme image\n"
+                   "$duck - Get a random duck image"
+                  )
 
 
 
